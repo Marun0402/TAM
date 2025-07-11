@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mrTAM Academy - From Basics to Brilliance</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 10px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #4A90E2, #4CAF50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff08" points="0,0 1000,300 1000,1000 0,700"/></svg>');
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideInDown 1s ease-out;
+        }
+
+        @keyframes slideInDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+        }
+
+        /* Courses Section */
+        .courses {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .course-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .course-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .course-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-features li {
+            padding: 0.3rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .course-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .course-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .enroll-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .enroll-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #555;
+            padding-top: 1rem;
+            color: #999;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animation on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <img src="teachIMG/tamLogo.png" alt="mrTAM Academy Logo">
+                <span>mrTAM Academy</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>From Basics to Brilliance</h1>
+                <p>Transform your career with our comprehensive online training programs in UI/UX Design, Web Development, and Creative Technologies</p>
+                <a href="#courses" class="cta-button">Explore Courses</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <h2 class="section-title">Our Premium Courses</h2>
+            <div class="course-grid">
+                <div class="course-card fade-in">
+                    <div class="course-icon">🎨</div>
+                    <h3>UI/UX Design Mastery</h3>
+                    <p>Master the art of creating intuitive and beautiful user interfaces with comprehensive UX research methodologies.</p>
+                    <ul class="course-features">
+                        <li>Design thinking process</li>
+                        <li>User research & personas</li>
+                        <li>Wireframing & prototyping</li>
+                        <li>Usability testing</li>
+                    </ul>
+                    <div class="course-price">$299</div>
+                    <button class="enroll-btn">Enroll Now</button>
+                </div>
+
+                <div class="course-card fade-in">
+                    <div class="course-icon">🎭</div>
+                    <h3>Graphic Design Pro</h3>
+                    <p>Create stunning visual communications with advanced design principles and industry-standard techniques.</p>
+                    <ul class="course-features">
+                        <li>Design principles & theory</li>
+                        <li>Brand identity design</li>
+                        <li>Print & digital design</li>
+                        <li>Typography mastery</li>
+                    </ul>
+                    <div class="course-price">$249</div>
+                    <button class="enroll-btn">Enroll Now</button>
+                </div>
+
+                <div class="course-card fade-in">
+                    <div class="course-icon">💻</div>
+                    <h3>Web Design Excellence</h3>
+                    <p>Build responsive, modern websites with cutting-edge design trends and best practices.</p>
+                    <ul class="course-features">
+                        <li>Responsive design</li>
+                        <li>Modern CSS techniques</li>
+                        <li>Web animations</li>
+                        <li>Performance optimization</li>
+                    </ul>
+                    <div class="course-price">$349</div>
+                    <button class="enroll-btn">Enroll Now</button>
+                </div>
+
+                <div class="course-card fade-in">
+                    <div class="course-icon">⚡</div>
+                    <h3>Frontend Development</h3>
+                    <p>Master JavaScript, React, and modern frontend technologies to build interactive web applications.</p>
+                    <ul class="course-features">
+                        <li>JavaScript ES6+</li>
+                        <li>React & state management</li>
+                        <li>API integration</li>
+                        <li>Modern build tools</li>
+                    </ul>
+                    <div class="course-price">$399</div>
+                    <button class="enroll-btn">Enroll Now</button>
+                </div>
+
+                <div class="course-card fade-in">
+                    <div class="course-icon">🖼️</div>
+                    <h3>Advanced Photoshop</h3>
+                    <p>Master advanced photo editing, digital art creation, and professional retouching techniques.</p>
+                    <ul class="course-features">
+                        <li>Advanced editing techniques</li>
+                        <li>Digital art creation</li>
+                        <li>Professional retouching</li>
+                        <li>Workflow optimization</li>
+                    </ul>
+                    <div class="course-price">$199</div>
+                    <button class="enroll-btn">Enroll Now</button>
+                </div>
+
+                <div class="course-card fade-in">
+                    <div class="course-icon">🎯</div>
+                    <h3>Figma Tools Mastery</h3>
+                    <p>Become a Figma expert with advanced prototyping, design systems, and collaborative workflows.</p>
+                    <ul class="course-features">
+                        <li>Advanced prototyping</li>
+                        <li>Design systems</li>
+                        <li>Team collaboration</li>
+                        <li>Plugin development</li>
+                    </ul>
+                    <div class="course-price">$179</div>
+                    <button class="enroll-btn">Enroll Now</button>
+                </div>
+
+                <div class="course-card fade-in">
+                    <div class="course-icon">♿</div>
+                    <h3>Accessibility Development</h3>
+                    <p>Create inclusive digital experiences with comprehensive accessibility standards and testing methods.</p>
+                    <ul class="course-features">
+                        <li>WCAG guidelines</li>
+                        <li>Screen reader optimization</li>
+                        <li>Keyboard navigation</li>
+                        <li>Color contrast compliance</li>
+                    </ul>
+                    <div class="course-price">$229</div>
+                    <button class="enroll-btn">Enroll Now</button>
+                </div>
+
+                <div class="course-card fade-in">
+                    <div class="course-icon">🔍</div>
+                    <h3>Manual Testing</h3>
+                    <p>Master comprehensive testing methodologies to ensure quality and reliability in software applications.</p>
+                    <ul class="course-features">
+                        <li>Test case design</li>
+                        <li>Bug reporting</li>
+                        <li>User acceptance testing</li>
+                        <li>Quality assurance</li>
+                    </ul>
+                    <div class="course-price">$189</div>
+                    <button class="enroll-btn">Enroll Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose mrTAM Academy?</h2>
+            <div class="features-grid">
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Expert Instructors</h3>
+                    <p>Learn from industry professionals with years of real-world experience</p>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">📱</div>
+                    <h3>Flexible Learning</h3>
+                    <p>Study at your own pace with lifetime access to course materials</p>
+                </div>
+                <!-- <div class="feature-item fade-in">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Industry Certificates</h3>
+                    <p>Earn recognized certificates to boost your career prospects</p>
+                </div> -->
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">💬</div>
+                    <h3>Community Support</h3>
+                    <p>Join our vibrant community of learners and get support when needed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>mrTAM Academy</h3>
+                    <p><strong>From Basics to Brilliance</strong><br>Empowering the next generation of designers and developers through comprehensive online training programs.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="#courses">All Courses</a></p>
+                    <p><a href="#features">Features</a></p>
+                    <p><a href="#contact">Contact Us</a></p>
+                    <p><a href="#">Blog</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>Email: learnwithtam24@gmail.com</p>
+                    <p>Phone: +91 9688093382</p>
+                    <p>Alt Phone: +91 9159583639</p>
+                    <p>Support: 24/7 Online Chat</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 mrTAM Academy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Header scroll effect
+        function handleScroll() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        }
+
+        // Enroll button interactions
+        document.querySelectorAll('.enroll-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                    alert('Thank you for your interest! Our enrollment team will contact you soon.');
+                }, 150);
+            });
+        });
+
+        // Initialize animations
+        window.addEventListener('scroll', () => {
+            animateOnScroll();
+            handleScroll();
+        });
+
+        // Trigger animations on page load
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
